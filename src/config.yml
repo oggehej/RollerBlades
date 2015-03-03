@@ -1,0 +1,16 @@
+# Cooldown is counted in ticks. 20 ticks = 1 second.
+# Region can be a WorldGuard region, a world or "all" (everywhere).
+
+Cooldown: 40
+Gears:
+  1: 0.45
+  2: 0.7
+  3: 0.9
+Blocks:
+- 0
+- 79
+- 174
+Regions:
+- rollerblades
+- world
+- all
