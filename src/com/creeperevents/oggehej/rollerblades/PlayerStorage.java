@@ -5,13 +5,11 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-public class PlayerStorage
-{
+public class PlayerStorage {
 	private HashMap<UUID, RunningPlayer> map = new HashMap<UUID, RunningPlayer>();
 
 	private RollerBlades plugin;
-	PlayerStorage(RollerBlades instance)
-	{
+	PlayerStorage(RollerBlades instance) {
 		plugin = instance;
 	}
 
@@ -21,8 +19,7 @@ public class PlayerStorage
 	 * @param player Player
 	 * @return isRunning
 	 */
-	public boolean isRunning(Player player)
-	{
+	public boolean isRunning(Player player) {
 		return map.containsKey(player.getUniqueId());
 	}
 
@@ -32,8 +29,7 @@ public class PlayerStorage
 	 * @param player Player
 	 * @return RunningPlayer
 	 */
-	public RunningPlayer getPlayer(Player player)
-	{
+	public RunningPlayer getPlayer(Player player) {
 		return map.get(player.getUniqueId());
 	}
 
@@ -42,8 +38,7 @@ public class PlayerStorage
 	 * 
 	 * @param player Player
 	 */
-	public void addRunning(Player player)
-	{
+	public void addRunning(Player player) {
 		if(!isRunning(player))
 			map.put(player.getUniqueId(), new RunningPlayer(player, plugin));
 	}
@@ -53,8 +48,7 @@ public class PlayerStorage
 	 * 
 	 * @param player Player
 	 */
-	public void stopPlayer(Player player)
-	{
+	public void stopPlayer(Player player) {
 		if(isRunning(player))
 			getPlayer(player).stop();
 		map.remove(player.getUniqueId());
@@ -63,10 +57,8 @@ public class PlayerStorage
 	/**
 	 * Remove all the players from storage in a safe way
 	 */
-	void stopAllPlayers()
-	{
-		for(UUID uuid : map.keySet())
-		{
+	void stopAllPlayers() {
+		for(UUID uuid : map.keySet()) {
 			map.get(uuid).stop();
 			map.remove(uuid);
 		}

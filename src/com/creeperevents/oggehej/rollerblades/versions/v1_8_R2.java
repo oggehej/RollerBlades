@@ -2,13 +2,13 @@ package com.creeperevents.oggehej.rollerblades.versions;
 
 import java.util.List;
 
-import net.minecraft.server.v1_8_R1.EnumParticle;
-import net.minecraft.server.v1_8_R1.PacketPlayOutWorldParticles;
+import net.minecraft.server.v1_8_R2.EnumParticle;
+import net.minecraft.server.v1_8_R2.PacketPlayOutWorldParticles;
 
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class v1_8_R1 implements NMS {
+public class v1_8_R2 implements NMS {
 	@Override
 	public void sendParticlePacket(List<Player> players, String particleType, float x, float y, float z, float xSpread, float ySpread, float zSpread, int amount) {
 		PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.valueOf(particleType), false, x, y, z, xSpread, ySpread, zSpread, 0, amount);

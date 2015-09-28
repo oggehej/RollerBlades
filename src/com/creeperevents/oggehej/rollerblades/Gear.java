@@ -2,8 +2,7 @@ package com.creeperevents.oggehej.rollerblades;
 
 import com.creeperevents.oggehej.rollerblades.exceptions.NoGearException;
 
-public enum Gear
-{
+public enum Gear {
 	NONE(0),
 	LOW(1),
 	MID(2),
@@ -11,8 +10,7 @@ public enum Gear
 
 	private int num;
 
-	Gear(int num)
-	{
+	Gear(int num) {
 		this.num = num;
 	}
 
@@ -21,8 +19,7 @@ public enum Gear
 	 * 
 	 * @return Speed
 	 */
-	public float getSpeed(RollerBlades plugin)
-	{
+	public float getSpeed(RollerBlades plugin) {
 		if(num == 0)
 			return .2F;
 		else
@@ -33,8 +30,7 @@ public enum Gear
 	 * Return the gear as a number
 	 * @return Gear
 	 */
-	public int getGear()
-	{
+	public int getGear() {
 		return this.num;
 	}
 
@@ -44,10 +40,8 @@ public enum Gear
 	 * @return Gear
 	 * @throws NoGearException No lower gear
 	 */
-	public Gear nextGear() throws NoGearException
-	{
-		switch(num)
-		{
+	public Gear nextGear() throws NoGearException {
+		switch(num) {
 		case 0:
 			return Gear.LOW;
 		case 1:
@@ -65,10 +59,8 @@ public enum Gear
 	 * @return Gear
 	 * @throws NoGearException No higher gear
 	 */
-	public Gear prevGear() throws NoGearException
-	{
-		switch(num)
-		{
+	public Gear prevGear() throws NoGearException {
+		switch(num) {
 		case 2:
 			return Gear.LOW;
 		case 3:

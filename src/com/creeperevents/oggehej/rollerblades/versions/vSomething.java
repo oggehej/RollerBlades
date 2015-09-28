@@ -10,20 +10,16 @@ import org.bukkit.entity.Player;
 public class vSomething implements NMS
 {
 	@Override
-	public void sendParticlePacket(List<Player> players, String particleType, float x, float y, float z, float xSpread, float ySpread, float zSpread, int amount)
-	{
+	public void sendParticlePacket(List<Player> players, String particleType, float x, float y, float z, float xSpread, float ySpread, float zSpread, int amount) {
 		if(particleType.equals(EffectEnum.FLAME))
-			for(Player player : players)
-			{
+			for(Player player : players) {
 				for(int i = 1; i <= amount / 25; i++)
 					player.getWorld().playEffect(new Location(player.getWorld(), x, y, z), Effect.MOBSPAWNER_FLAMES, null);
 				return;
 			}
 		else if(particleType.equals(EffectEnum.SPELL_WITCH))
-			for(Player player : players)
-			{
-				for(int i = 1; i <= amount; i++)
-				{
+			for(Player player : players) {
+				for(int i = 1; i <= amount; i++) {
 					Random r = new Random();
 					player.getWorld().playEffect(new Location(player.getWorld(),
 							x + (((float) r.nextInt((int)(xSpread * 100 * 2)) / 100)) - xSpread,
@@ -33,10 +29,8 @@ public class vSomething implements NMS
 				return;
 			}
 		else if(particleType.equals(EffectEnum.SMOKE_LARGE))
-			for(Player player : players)
-			{
-				for(int i = 1; i <= amount; i++)
-				{
+			for(Player player : players) {
+				for(int i = 1; i <= amount; i++) {
 					Random r = new Random();
 					player.getWorld().playEffect(new Location(player.getWorld(),
 							x + (((float) r.nextInt((int)(xSpread * 100 * 2)) / 100)) - xSpread,
@@ -48,8 +42,7 @@ public class vSomething implements NMS
 	}
 
 	@Override
-	public void sendParticlePacket(List<Player> players, String particleType, float x, float y, float z, float xSpread, float ySpread, float zSpread, int amount, int blockType)
-	{
+	public void sendParticlePacket(List<Player> players, String particleType, float x, float y, float z, float xSpread, float ySpread, float zSpread, int amount, int blockType) {
 		this.sendParticlePacket(players, particleType, x, y, z, xSpread, ySpread, zSpread, amount);
 	}
 }

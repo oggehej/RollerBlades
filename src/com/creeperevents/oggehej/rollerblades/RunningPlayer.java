@@ -13,8 +13,7 @@ import com.creeperevents.oggehej.rollerblades.exceptions.CooldownException;
 import com.creeperevents.oggehej.rollerblades.exceptions.NoGearException;
 import com.creeperevents.oggehej.rollerblades.versions.EffectEnum;
 
-public class RunningPlayer
-{
+public class RunningPlayer {
 	private Player player;
 	private CooldownRunnable cooldown = null;
 	private Gear gear = Gear.NONE;
@@ -26,8 +25,7 @@ public class RunningPlayer
 	private GameMode prevGamemode;
 	private float prevWalkspeed;
 
-	RunningPlayer(Player player, RollerBlades plugin)
-	{
+	RunningPlayer(Player player, RollerBlades plugin) {
 		this.player = player;
 		this.plugin = plugin;
 		this.prevHunger = player.getFoodLevel();
@@ -54,8 +52,7 @@ public class RunningPlayer
 	/**
 	 * Gear up the player
 	 */
-	public void gearUp()
-	{
+	public void gearUp() {
 		try {
 			if(cooldown != null)
 				throw new CooldownException();
@@ -78,8 +75,7 @@ public class RunningPlayer
 	 * 
 	 * @return false if there's now lower gear
 	 */
-	public boolean gearDown()
-	{
+	public boolean gearDown() {
 		try {
 			if(cooldown != null)
 				cooldown.cancel();
@@ -101,8 +97,7 @@ public class RunningPlayer
 	 * @param mat
 	 */
 	@SuppressWarnings("deprecation")
-	public void runParticles(Material mat)
-	{
+	public void runParticles(Material mat) {
 		Location loc = player.getLocation();
 		List<Player> list = player.getWorld().getPlayers();
 		plugin.getNMS().sendParticlePacket(list, EffectEnum.BLOCK_CRACK, (float) loc.getX(), (float) loc.getY() + 0.25F, (float) loc.getZ(), 0F, 0.5F, 0F, (int)(player.getWalkSpeed() * 10), mat.getId());
@@ -113,8 +108,7 @@ public class RunningPlayer
 	/**
 	 * Set all player values to what they were before the player ran
 	 */
-	void stop()
-	{
+	void stop() {
 		if(cooldown != null)
 			cooldown.cancel();
 		Effects.CRASH.play(player, plugin);
@@ -131,8 +125,7 @@ public class RunningPlayer
 	/**
 	 * Stop the sprinting player
 	 */
-	public void stopSprint()
-	{
+	public void stopSprint() {
 		player.setFoodLevel(6);
 		BukkitRunnable run = new BukkitRunnable()
 		{
@@ -147,21 +140,18 @@ public class RunningPlayer
 	/**
 	 * Run the gear cool down timer
 	 */
-	private void cooldown()
-	{
+	private void cooldown() {
 		CooldownRunnable runnable = new CooldownRunnable();
 		cooldown = runnable;
 		cooldown.runTaskTimer(plugin, 0, 1);
 	}
 
-	private class CooldownRunnable extends BukkitRunnable
-	{
+	private class CooldownRunnable extends BukkitRunnable {
 		private int num = 0;
 		private int ticks = plugin.getConfig().getInt("Cooldown");
 
 		@Override
-		public void run()
-		{
+		public void run() {
 			player.setExp((float) num / ticks);
 			if(num >= ticks)
 				cancel();
@@ -169,8 +159,7 @@ public class RunningPlayer
 		}
 
 		@Override
-		public synchronized void cancel()
-		{
+		public synchronized void cancel() {
 			player.setExp(1F);
 			super.cancel();
 			cooldown = null;

@@ -9,12 +9,9 @@ import org.bukkit.entity.Player;
 
 import com.creeperevents.oggehej.rollerblades.versions.EffectEnum;
 
-public enum Effects
-{
-	BURP()
-	{
-		public void play(Player player, RollerBlades plugin)
-		{
+public enum Effects {
+	BURP() {
+		public void play(Player player, RollerBlades plugin) {
 			Location loc = player.getLocation();
 			List<Player> list = new ArrayList<Player>();
 			list.add(player);
@@ -22,10 +19,8 @@ public enum Effects
 			player.playSound(loc, Sound.BURP, 1, 1);
 		}
 	},
-	CRASH()
-	{
-		public void play(Player player, RollerBlades plugin)
-		{
+	CRASH() {
+		public void play(Player player, RollerBlades plugin) {
 			Location loc = player.getLocation();
 			List<Player> list = player.getWorld().getPlayers();
 			plugin.getNMS().sendParticlePacket(list, EffectEnum.SMOKE_LARGE, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ(), 0.5F, 0.5F, 0.5F, 50);
@@ -33,10 +28,8 @@ public enum Effects
 				p.playSound(loc, Sound.BLAZE_HIT, 1, 1);
 		}
 	},
-	FLAME()
-	{
-		public void play(Player player, RollerBlades plugin)
-		{
+	FLAME() {
+		public void play(Player player, RollerBlades plugin) {
 			Location loc = player.getLocation();
 			List<Player> list = player.getWorld().getPlayers();
 			plugin.getNMS().sendParticlePacket(list, EffectEnum.FLAME, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ(), 0.3F, 1.5F, 0.3F, 25);
@@ -45,10 +38,8 @@ public enum Effects
 			player.playSound(loc, Sound.FIREWORK_BLAST2, 1, 1);
 		}
 	},
-	COOL()
-	{
-		public void play(Player player, RollerBlades plugin)
-		{
+	COOL() {
+		public void play(Player player, RollerBlades plugin) {
 			Location loc = player.getLocation();
 			List<Player> list = new ArrayList<Player>();
 			list.add(player);

@@ -3,7 +3,6 @@ package com.creeperevents.oggehej.rollerblades;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,16 +11,14 @@ import com.creeperevents.oggehej.rollerblades.versions.NMS;
 import com.creeperevents.oggehej.rollerblades.versions.vSomething;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-public class RollerBlades extends JavaPlugin
-{
+public class RollerBlades extends JavaPlugin {
 	private NMS nmsHandler;
 	private PlayerStorage storage;
 	private File cacheFile;
 	private FileConfiguration cache;
 	WorldGuardPlugin wg = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
 
-	public void onEnable()
-	{
+	public void onEnable() {
 		setupNMS();
 		setupCache();
 
@@ -39,8 +36,7 @@ public class RollerBlades extends JavaPlugin
 			getLogger().info("Using WorldGuard");
 	}
 
-	public void onDisable()
-	{
+	public void onDisable() {
 		System.out.println("Proper shutdown");
 		storage.stopAllPlayers();
 	}
@@ -50,8 +46,7 @@ public class RollerBlades extends JavaPlugin
 	 * 
 	 * @return PlayerStorage
 	 */
-	public PlayerStorage getStorage()
-	{
+	public PlayerStorage getStorage() {
 		return storage;
 	}
 
@@ -60,8 +55,7 @@ public class RollerBlades extends JavaPlugin
 	 * 
 	 * @return
 	 */
-	public NMS getNMS()
-	{
+	public NMS getNMS() {
 		return this.nmsHandler;
 	}
 
@@ -70,16 +64,14 @@ public class RollerBlades extends JavaPlugin
 	 * 
 	 * @return Cache
 	 */
-	public FileConfiguration getCache()
-	{
+	public FileConfiguration getCache() {
 		return this.cache;
 	}
 	
 	/**
 	 * Save the cache
 	 */
-	public void saveCache()
-	{
+	public void saveCache() {
 		try {
 			cache.save(cacheFile);
 		} catch (IOException e) {
@@ -90,22 +82,17 @@ public class RollerBlades extends JavaPlugin
 	/**
 	 * Set up the NMS functions
 	 */
-	private void setupNMS()
-	{
+	private void setupNMS() {
 		String packageName = this.getServer().getClass().getPackage().getName();
 		String version = packageName.substring(packageName.lastIndexOf('.') + 1);
 
-		try
-		{
+		try {
 			final Class<?> clazz = Class.forName(getClass().getPackage().getName() + ".versions." + version);
-			if (NMS.class.isAssignableFrom(clazz))
-			{
+			if (NMS.class.isAssignableFrom(clazz)) {
 				getLogger().info("Using NMS version " + version);
 				this.nmsHandler = (NMS) clazz.getConstructor().newInstance();
 			}
-		}
-		catch (final Exception e)
-		{
+		} catch (Exception e) {
 			getLogger().info("Couldn't find support for " + version +". Using failproof (but laggy and less fancy) option.");
 			this.nmsHandler = new vSomething();
 		}
@@ -114,8 +101,7 @@ public class RollerBlades extends JavaPlugin
 	/**
 	 * Set up the player cache
 	 */
-	private void setupCache()
-	{
+	private void setupCache() {
 		cacheFile = new File(getDataFolder(), "cache.yml");
 
 		try {
@@ -129,7 +115,7 @@ public class RollerBlades extends JavaPlugin
 
 		try {
 			cache.load(cacheFile);
-		} catch (IOException | InvalidConfigurationException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
